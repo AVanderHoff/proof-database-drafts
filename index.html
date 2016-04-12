@@ -1,121 +1,137 @@
 <!DOCTYPE html>
-<html>
-
-
+<html lang="en">
 <head>
-	<title>proof database</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<title>Train Station</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>	
+ 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+ 	<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']],
+  			displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+  			processEscapses: true,
+  			} ,
+  Tex:{
+  		Macros:{
+  				newcommand: null,
+  				renewcommand: null,
+  				newenvironment: null,
+  				renewenvironment:null,
+  				def:null,
+  				let: null
+			}
+	}
 
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  });
+</script>
+
+<style>
+td{color:white;}
+body{background-color:black;
+}
+
+
+</style>
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+	
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mirror</title>
 <script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
   tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapses: true,
-            } ,
+  			displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+  			processEscapses: true,
+  			} ,
   Tex:{
-        Macros:{
-                newcommand: null,
-                renewcommand: null,
-                newenvironment: null,
-                renewenvironment:null,
-                def:null,
-                let: null
-            }
-    }
+  		Macros:{
+  				newcommand: null,
+  				renewcommand: null,
+  				newenvironment: null,
+  				renewenvironment:null,
+  				def:null,
+  				let: null
+			}
+	}
 
   });
 </script>
-<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>	
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+<style>
 
-<style type="text/css">
-	
-.dog{
-	background-color:blue;
-	 position:absolute;
-	 height:100%;
-	 width:100%;
-	 right:0px;
-	 top:0px;
+#chatinput{height:100px;
+			border:2px solid white;
+			width:1140px;
+			background-color: black;
+			color:white;
 }
+#printchatbox{color:white;}
+.panel-body{background-color: black;
+}
+.panel{border-color:white;}
 
-body{height:1000px;}
-#div-area{height:300px;}
 
+tr{height:10px;}
 
 
 </style>
+
+
+
 </head>
-
-
-
-
-
-
-
-
 <body>
-<div id="div-area">
-			<p>$andrew$</p>
-</div>
 
-<p>MathJax</p>
-<input type="text" id="jax">
 
-<p>name</p>
-<input type="text" id="name">
-<p>area</p>
-<input type="text" id="area">
-<p>sub area</p>
-<input type="text" id="subarea">
-<p> dependancies </p>
-<input type="text" id="dependancies">
-<br>
-<br>
-<button id="add">ADD</button>
+<!--<input type='text' name='fname'  class='chatinput' id='chatinput'> -->
+
 
 <div class="container">
 
-
-
-
-
-
-
-
+<div id="modal-area"></div>
 
 <div class="row">
-	<div class="col-lg-12">
-		<div class="jumbotron" style="background-color: #0000ff; color: #ffffff" >
-			<h1 class="text-center">Proof Database</h1>
-		</div>
+	<div class="col-lg-12">	
+		<textarea id='chatinput' rows="20" ></textarea>
+
+		<div class='printchatbox' id='printchatbox'></div>
 	</div>
 </div>
 
+
+
+
+
+
 	
-
-
-
-
-
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-primary">
+			
 				<div class="panel-body">
 					<table class="table table-hover" id="table">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Area</th>
-								<th>Sub Area</th>
-								<th>Dependancies</th>
-								<th>Date Added</th>
+								<th></th>
+							<!--	<th>Destination</th>
+								<th>Frequency</th>
+								<th>Next Arrival</th>
+								<th>Minutes Away</th> -->
 							</tr>
 						</thead>
 						<tbody ></tbody>
@@ -125,79 +141,193 @@ body{height:1000px;}
 		</div>
 	</div>
 
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Add Train</strong></h3>
+				</div>
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+							<label for="">Train Name</label>
+							<input type="text" class="form-control" id="train-name">
+						</div>
 
+						<div class="form-group">
+							<label for="">Destination</label>
+							<input type="text" class="form-control" id="destination">
+						</div>
 
+						<div class="form-group">
+							<label for="">Start Time (XX:XX miltary time)</label>
+							<input type="text" pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}" class="form-control" id="start-time">
+						</div>
 
-
-
-
-
-</div>
-
+						<div class="form-group">
+							<label for="">Frequency (minutes)</label>
+							<input type="number" class="form-control" id="frequency">
+						</div>
+						<button type="submit" class="btn btn-primary" id="submit">Submit</button>
+					</form>
+				</div>
+			</div>
 		
+	</div>
+
+
+
+
+
+
 </body>
-
-
-
-
-
-
 
 <script type="text/javascript">
 
-$("#add").on('click',function(){
-	var now = moment().format("MM/DD/YYYY");
-	var jax = document.getElementById('jax'); 
-	var name = $('#name').val().trim();
-	var area = $('#area').val().trim();
-	var subarea = $('#subarea').val().trim();
-	var dependancies = $('#dependancies').val().trim();
 
-
-	var row = $("<tr>");
-
-	row.append('<td>' + name + '</td>');
-	row.append('<td>' + area + '</td>');
-	row.append('<td>' + subarea + '</td>');
-	row.append('<td>' + dependancies + '</td>');
-	row.append('<td>' + now + '</td>');
-	row.addClass('openModal');
-	row.attr('data', name);
-	$("#table > tbody").append(row);
-
-	
-
-	var div = $('<div>');
-
-		div.addClass('dog');
-		div.attr('id',name);
-		document.getElementById(name).innerHTML = jax.value;
-		MathJax.Hub.Queue( ["Typeset",MathJax.Hub, name]);
-	
-	$('#div-area').append(div);
-
-});
-
-$(document).on('click','.openModal',function(){
-  	var idOfElement = $(this).attr('data');
-  	$("#"+idOfElement).css('display','initial');
-
-  	
-
-  
-  });
-
-/*
 var inputBox = document.getElementById('chatinput');
 
 inputBox.onkeyup = function(){
     document.getElementById('printchatbox').innerHTML = inputBox.value;
     MathJax.Hub.Queue( ["Typeset",MathJax.Hub, "printchatbox"]);
-} */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var trains = new Firebase("https://mathjaxtest.firebaseio.com/");
+
+// Button for adding trains
+$("#submit").on("click", function(){
+
+window.location.reload()
+
+	// gets user input
+	var name = $("#chatinput").val().trim() ;
+	
+	var destination = $("#destination").val().trim();
+	var starttime = $("#start-time").val().trim();
+	var frequency = $("#frequency").val().trim();
+
+	//gets current date 
+	var now = moment().format("YYYY-MM-DD");
+	//current unix time
+	var nowunix = moment().unix();
+	// takes current seconds in unix time
+	var secondsunix = moment.unix(nowunix).format("ss");
+	//merges current date, user input, and seconds unix 
+	var merged = now + " " + starttime +":" + secondsunix ;
+	// converts merged to new Date
+	var convertedmerged = moment(new Date(merged));
+	// formats converted merged in unix time, and this is put in database
+	var unixstart = moment(convertedmerged).format("X");
+	
+
+	
+	//  local temporary object for holding train data
+	var train = {
+		name:  name,
+		destination: destination,
+		start: unixstart,
+		frequency: frequency
+	}
+
+	// uploads train data to the database
+	trains.push(train);
+
+	// clear text boxes
+	$("#train-name").val("");
+	$("#destination").val("");
+	$("#start-time").val("");
+	$("#frequency").val("");
+
+	
+	return false;
+});
+
+
+// firebase event for adding trains to database and appending train information to html
+trains.on("child_added", function(childSnapshot, prevChildKey){
+
+	console.log(childSnapshot.val());
+
+	// store everything into a variable.
+	var trainname = childSnapshot.val().name;
+	var traindestination = childSnapshot.val().destination;
+	var trainstart = childSnapshot.val().start;
+	var trainfrequency = childSnapshot.val().frequency;
+
+	//current unix time
+	var now = moment().unix();
+	// frequency converted to seconds
+	var seconds = trainfrequency * 60;
+	var minutes = 0;
+	
+
+	//determines how many minutes until next train
+	if((now - trainstart) <= seconds){
+		minutes = Math.floor((seconds - (now - trainstart)) / 60);
+	}
+	else{
+		minutes = Math.floor((seconds - ((now - trainstart) % seconds)) / 60 );
+	}
+
+	// determines time of next train
+	var minutesadded = now + minutes*60  ;
+	//converts minutes added into time format
+	var nexttime =  moment.unix(minutesadded).format("h:mm");
+
+
+	//creates table row to be appended to html
+	var row = $("<tr>");
+
+	row.append('<td class="open-modal" data="'+ trainstart + '">' + trainname + '</td>');
+	//row.append('<td>' + traindestination + '</td>');
+	//row.append('<td>' + trainfrequency + '</td>');
+	//row.append('<td>' + nexttime + '</td>');
+	//row.append('<td>' + minutes + '</td>');
+
+	$("#table > tbody").append(row);
+
+	var div1 = $('<div class="modal fade" tabindex="-1" role="dialog" id="' + trainstart +'">');
+	var div2 = $('<div class="modal-dialog">');
+	var div3 = $('<div class="modal-content">');
+	var div4 = $('<div class="modal-body" id"'+ (trainstart+1) + '" >');
+	div4.append(trainname);
+	div3.append(div4);
+	div2.append(div3);
+	div1.append(div2);
+	$('#modal-area').append(div1);
+
+
+});
+
+function run(){
+MathJax.Hub.Queue(["Typeset",MathJax.Hub,'table']);}
+
+
+
+run();
+
+$(document).on('click','.open-modal',function(){
+
+	var modalvar = $(this).attr('data');
+	$('#'+ modalvar).modal('toggle');
+	
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub, modalvar+1 ]);
+
+});
+
+
 
 </script>
-
-
-
-
 </html>
