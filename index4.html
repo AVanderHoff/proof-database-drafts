@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Train Station</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>	
+ 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+ 	<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']],
+  			displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+  			processEscapses: true,
+  			} ,
+  Tex:{
+  		Macros:{
+  				newcommand: null,
+  				renewcommand: null,
+  				newenvironment: null,
+  				renewenvironment:null,
+  				def:null,
+  				let: null
+			}
+	}
+
+  });
+</script>
+
+	
+
+<style>
+
+td{color:white;}
+body{background-color:black;
+}
+
+
+
+#chatinput{height:100px;
+			border:2px solid white;
+			width:1140px;
+			background-color: black;
+			color:white;
+}
+#printchatbox{color:white;}
+.panel-body{background-color: black;
+}
+.panel{border-color:white;}
+
+
+tr{height:10px;}
+
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div id="modal-area"></div>
+
+<div class="row">
+  <div class="col-lg-12"> 
+    <textarea id='chatinput' rows="20" ></textarea>
+
+    <div class='printchatbox' id='printchatbox'></div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+      <div class="panel-body">
+          <form>
+
+
+            <div class="form-group">
+              <label for="">Description</label>
+              <input type="text" class="form-control" id="description">
+            </div>
+
+              <div class="form-group">
+              <label for="">Area</label>
+              <input type="text" class="form-control" id="area">
+            </div>
+
+          </form>
+        </div>
+
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+      
+        <div class="panel-body">
+          <table class="table table-hover" id="table">
+            <thead>
+              <tr>
+                
+                <th>Description</th>
+                <th>Area</th>
+                <th>Date Added</th>
+                
+              </tr>
+            </thead>
+            <tbody ></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+</body>
+
+
+<script type="text/javascript">
+  
+var math = new Firebase("https://mathjaxtest2.firebaseio.com/");
+
+
+var inputBox = document.getElementById('chatinput');
+
+inputBox.onkeyup = function(){
+    document.getElementById('printchatbox').innerHTML = inputBox.value;
+    MathJax.Hub.Queue( ["Typeset",MathJax.Hub, "printchatbox"]);
+}
+
+
+$("#submit").on("click", function(){
+
+window.location.reload()
+
+
+  var proof = $("#chatinput").val().trim() ;
+  var description = $("#description").val().trim();
+  var area = $("#area").val().trim();
+  var now = moment().unix();
+  var date = moment().format("MM/DD/YY");
+
+  var node = {
+    proof:  proof,
+    description: description,
+    area: area,
+    now: now,
+    date: date 
+  }
+
+  math.push(node);
+
+  return false;
+});
+
+
+math.on("child_added", function(childSnapshot, prevChildKey){
+
+  console.log(childSnapshot.val());
+
+  var proof2 = childSnapshot.val().proof;
+  var description2 = childSnapshot.val().description;
+  var area2 = childSnapshot.val().area;
+  var now2 = childSnapshot.val().now;
+  var date2 = childSnapshot.val().date;
+
+  var row = $('<tr class="open-modal" data="' + now2 + '">');
+  row.append('<td>' + description2 + '</td>');
+  row.append('<td>' + area2 + '</td>');
+  row.append('<td>' + date2 + '</td>');
+  $("#table > tbody").append(row);
+
+    var div1 = $('<div class="modal fade" tabindex="-1" role="dialog" id="' + now2 +'">');
+  var div2 = $('<div class="modal-dialog">');
+  var div3 = $('<div class="modal-content">');
+  var div4 = $('<div class="modal-body" id"'+ (now2 + 1) + '" >');
+  div4.append(proof2);
+  div3.append(div4);
+  div2.append(div3);
+  div1.append(div2);
+  $('#modal-area').append(div1);
+
+
+
+});
+
+$(document).on('click','.open-modal',function(){
+
+  var modalvar = $(this).attr('data');
+  $('#'+ modalvar).modal('toggle');
+  
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub, modalvar+1 ]);
+
+});
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</html>
