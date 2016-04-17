@@ -150,7 +150,7 @@ tr{height:10px;}
 </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="submitEdit">Submit</button>
+        <button type="button" class="btn btn-primary"  id="submitEdit">Submit</button>
       </div>
     </div>
   </div>
@@ -200,6 +200,8 @@ tr{height:10px;}
 var math = new Firebase("https://mathjaxtest2.firebaseio.com/");
 //var counter = new Firebase("https://countermathjax.firebaseio.com/");
 
+
+
 $('#edit-info-button').hide();
 
 var idcounter ; 
@@ -225,31 +227,6 @@ math.once("value", function(snapshot) {
   });
 
 }); */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 $("#submitAdd").on("click", function(){
@@ -353,6 +330,8 @@ $(document).on('click','.delete ',function(){
 //edit
 $(document).on('click','.edit',function(){
 
+
+
 var editData = $(this).attr('data-key');
 var rowidEdit = $(this).attr('data-id');
 $('#edit-info-button').show();
@@ -360,11 +339,13 @@ $('#add-info-button').hide();
 
 
 var editData = $(this).attr('data-key');
-math.once("value", function(snapshot) {
+
+  math.once("value", function(snapshot) {
   var proof3 = snapshot.child(editData).child('proof').val();
   var description3 = snapshot.child(editData).child('description').val();
   var area3 = snapshot.child(editData).child('area').val();
   var now3 = snapshot.child(editData).child('now').val();
+  var key3 = snapshot.key();
   $("#chatinput").val(proof3);
   $('#printchatbox').html(proof3);
 
@@ -385,7 +366,8 @@ math.once("value", function(snapshot) {
   $('#edit-info-modal').modal('hide');
   math.child(editData).set({ proof: proofEdit , description: descriptionEdit , area: areaEdit , now: now3 , date: dateEdit });
 
-
+  var modal= $('#'+ now3);
+  
   $('tr[data="'+ rowidEdit + '"]').find("td").eq(0).html(descriptionEdit);
   $('tr[data="'+ rowidEdit + '"]').find("td").eq(1).html(areaEdit);
   $('tr[data="'+ rowidEdit + '"]').find("td").eq(2).html(dateEdit);
@@ -393,15 +375,26 @@ math.once("value", function(snapshot) {
   $('#add-info-button').show();
   $('#chatinput').val("");
   $('#printchatbox').html(""); 
+  //modal.find('.modal-body').empty();
+  modal.find('.modal-body').html(proofEdit);
+
   
+
+
+
+
+
+
+
  //div with math wont refresh unless refresh page
+ // possibly add clear textboxes when delete
 
   
   
 
   });
 
-});
+}); 
 
 
 });
@@ -415,8 +408,6 @@ $('#edit-info-button').hide();
 
 
 };
-
-
 
 
 
