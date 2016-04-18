@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Latex Conversion</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+ <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+  
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapses: true,
+        } ,
+  Tex:{
+      Macros:{
+          newcommand: null,
+          renewcommand: null,
+          newenvironment: null,
+          renewenvironment:null,
+          def:null,
+          let: null
+      }
+  }
+
+  });
+</script>
+
+
+
+
+<style>
+body{
+  font-family: 'Lato', sans-serif;
+}
+td{color:white;}
+
+body{background:#e9e9e9;}
+.container{background:white;border:1px solid black;}
+
+.inside-container{
+  border:1px solid black;
+}
+.text-display{
+      height:100px;     
+      width:500px;    
+      border-radius:10px;
+      box-shadow:-2px 2px 8px rgba(0,0,0,0.7);
+      padding:10px;
+      font-size:22px;
+}
+#chatinput{
+      height:400px;
+      color:red;
+      
+
+}
+#printchatbox{
+      min-height:400px;
+      color:black;
+      height:auto;
+  }
+
+#link-modal-body{
+  min-height: 200px;
+  height:auto;}
+td{
+  color:black;
+  font-size: 20px;
+}
+.panel{border-color:white;}
+.unique-button{
+  padding:10px;
+  margin:10px;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    
+ <div class="row">
+ <div id="modal-area"></div>
+    <div class="col-md-12"><h2>Latext Conversion</h2></div>
+    <div class="col-md-12">  
+      <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Search Stack Exchange
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" id="tex-stack-exchange" tabindex="-1" href="#">Tex Stack Exchange</a></li>
+        <li role="presentation"><a role="menuitem" id="math-stack-exchange" tabindex="-1" href="#">Math Stack Exchange</a></li>
+        <li role="presentation"><a role="menuitem" id="math-overflow" tabindex="-1" href="#">Math Overflow</a></li>
+        <li role="presentation"><a role="menuitem" id="stack-overflow" tabindex="-1" href="#">Stack Overflow</a></li>
+        <li role="presentation"><a role="menuitem" id="physics-stack-exchange" tabindex="-1" href="#">Physics Stack Exchange</a></li>
+      </ul>
+      </div>
+    </div>
+
+
+<div class="modal fade bs-example-modal-lg" id="stack-exchange-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" id="stack-exchange-modal-header"></div>
+      <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" id="stack-exchange-modal-input">
+            </div>
+          </form>
+        <button type="button" class="btn btn-primary" id="stack-exchange-modal-search">Submit</button>
+      </div>
+
+
+      </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="link-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body" id="link-modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+    
+
+    <div class="col-md-6"><textarea  id="chatinput" rows="20" class="text-display" ></textarea></div>
+    <div class="col-md-6"><div class="text-display" id='printchatbox'></div></div>
+    <div class="col-md-12">
+      <button type="button" class="btn btn-warning unique-button" data-toggle="modal" data-target="#add-info-modal" id="add-info-button">Add Information</button>
+      <button type="button" class="btn btn-success unique-button" data-toggle="modal" data-target="#edit-info-modal" id="edit-info-button">Edit Information</button>
+    </div>
+    <div class="col-md-12">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="modal fade" id="add-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Information</h4>
+              </div>
+            <div class="modal-body">
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                      <label for="">Description</label>
+                      <input type="text" class="form-control" id="descriptionAdd">
+                  <!--    <textarea type='text' class="form-control" id="descriptionAdd"></textarea>-->
+                  </div>
+                  <div class="form-group">
+                      <label for="">Area</label>
+                      <input type="text" class="form-control" id="areaAdd">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+            <!--    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                <button type="button" class="btn btn-primary" id="submitAdd">Submit</button>
+              </div>
+            </div>
+         </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+      
+        <div class="panel-body">
+          <table class="table table-hover" id="table">
+            <thead>
+              <tr> 
+                
+                <th>Description</th>
+                <th>Area</th>
+                <th>Date Added</th>
+                
+              </tr>
+            </thead>
+            <tbody ></tbody>
+          </table>
+            
+            <div class="modal fade" id="edit-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelEdit">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabelEdit">Edit Information</h4>
+      </div>
+      <div class="modal-body">
+      <div class="panel-body">
+          <form>
+
+
+            <div class="form-group">
+              <label for="">Description</label>
+              <input type="text" class="form-control" id="descriptionEdit">
+            <!--  <textarea type='text' class="form-control" id="descriptionEdit"></textarea> -->
+            </div>
+
+              <div class="form-group">
+              <label for="">Area</label>
+              <input type="text" class="form-control" id="areaEdit">
+            </div>
+
+          </form>
+        </div>
+
+</div>
+      <div class="modal-footer">
+     <!--   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <button type="button" class="btn btn-primary" id="submitEdit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    var math = new Firebase("https://mathjaxtest2.firebaseio.com/");
+    //var counter = new Firebase("https://countermathjax.firebaseio.com/");
+
+
+
+    $('#edit-info-button').hide();
+
+    var idcounter;
+    var inputBox = document.getElementById('chatinput');
+
+    inputBox.onkeyup = function() {
+        document.getElementById('printchatbox').innerHTML = inputBox.value;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "printchatbox"]);
+    }
+
+
+
+
+    /*$('#add-information').on('click',function(){
+
+
+
+    math.once("value", function(snapshot) {
+      var description3 = snapshot.child(editData).child('description').val();
+      var area3 = snapshot.child(editData).child('area').val();
+      $('#description').val(description3);
+      $('#area').val(area3);
+      });
+
+    }); */
+
+
+
+
+    $("#submitAdd").on("click", function() {
+
+              var proof = $("#chatinput").val().trim();
+        var description = $("#descriptionAdd").val().trim();
+        var area = $("#areaAdd").val().trim();
+        var now = moment().unix();
+        var date = moment().format("MM/DD/YY");
+
+
+
+        var node = {
+            proof: proof,
+            description: description,
+            area: area,
+            now: now,
+            date: date
+        }
+
+        math.push(node);
+
+        $("#descriptionAdd").val("");
+        $("#areaAdd").val("");
+        $('#chatinput').val("");
+        $('#printchatbox').html("");
+$('#add-info-modal').modal('hide');
+
+
+        return false;
+    });
+
+
+    math.on("child_added", function(childSnapshot, prevChildKey) {
+
+        console.log(childSnapshot.val());
+
+        var proof2 = childSnapshot.val().proof;
+        var description2 = childSnapshot.val().description;
+        var area2 = childSnapshot.val().area;
+        var now2 = childSnapshot.val().now;
+        var date2 = childSnapshot.val().date;
+        //used to be .name() , keep in mind if have problems
+        var key = childSnapshot.key();
+console.log(proof2);
+        var row = $('<tr class="open-modal" data="' + now2 + '">');
+        row.append('<td>' + description2 + '</td>');
+        row.append('<td>' + area2 + '</td>');
+        row.append('<td>' + date2 + '</td>');
+        $("#table > tbody").append(row);
+
+        var div1 = $('<div class="modal fade" tabindex="-1" role="dialog" id="' + now2 + '">');
+        var div2 = $('<div class="modal-dialog modal-lg">');
+        var div3 = $('<div class="modal-content">');
+        var div4 = $('<div class="modal-body" id"' + (now2 + 1) + '" >');
+        var div5 = $('<div class="modal-footer">');
+        var buttonEdit = $('<button class="edit btn btn-default" data-key="' + key + '" data-id="' + now2 + '" data-dismiss="modal" >Edit</button>');
+        var buttonDelete = $('<button class="delete" data-key="' + key + '" data-id="' + now2 + '" data-dismiss="modal">Delete</button>');
+        /*   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary">Save changes</button>
+         </div> */
+
+
+
+        div5.append(buttonEdit);
+        div5.append(buttonDelete);
+        div4.append(proof2);
+
+        div3.append(div4);
+        div3.append(div5);
+        div2.append(div3);
+        div1.append(div2);
+        $('#modal-area').append(div1);
+
+
+    });
+
+    $(document).on('click', '.open-modal', function() {
+
+        var modalvar = $(this).attr('data');
+        $('#' + modalvar).modal('toggle');
+
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, modalvar + 1]);
+
+    });
+
+    $(document).on('click', '.delete ', function() {
+
+        var deleteData = $(this).attr('data-key');
+        var rowidDelete = $(this).attr('data-id');
+        math.child(deleteData).remove();
+        $('tr[data="' + rowidDelete + '"]').remove();
+
+
+    });
+
+  
+
+
+
+
+    //edit
+    $(document).on('click', '.edit', function() {
+
+
+
+        var editData = $(this).attr('data-key');
+        
+        var rowidEdit = $(this).attr('data-id');
+        $('#edit-info-button').show();
+        $('#add-info-button').hide();
+
+
+        
+
+        math.once("value", function(snapshot) {
+            var proof3 = snapshot.child(editData).child('proof').val();
+            var description3 = snapshot.child(editData).child('description').val();
+            var area3 = snapshot.child(editData).child('area').val();
+            var now3 = snapshot.child(editData).child('now').val();
+            var key3 = snapshot.key();
+
+            $("#chatinput").val(proof3);
+            $('#printchatbox').html(proof3);
+
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'printchatbox']);
+
+            $('#edit-info-button').on('click', function() {
+                $("#descriptionEdit").val(description3);
+                $('#areaEdit').val(area3);
+            });
+
+      
+            $('#submitEdit').on('click', function() {
+
+                var proofEdit = $("#chatinput").val().trim();
+                var descriptionEdit = $("#descriptionEdit").val().trim();
+                var areaEdit = $("#areaEdit").val().trim();
+                var dateEdit = moment().format("MM/DD/YY");
+                $('#edit-info-modal').modal('hide');
+                math.child(editData).set({
+                    proof: proofEdit,
+                    description: descriptionEdit,
+                    area: areaEdit,
+                    now: now3,
+                    date: dateEdit
+                },onComplete); 
+
+
+
+                function onComplete(){
+
+                var modal = $('#' + now3);
+
+                $('tr[data="' + rowidEdit + '"]').find("td").eq(0).html(descriptionEdit);
+                $('tr[data="' + rowidEdit + '"]').find("td").eq(1).html(areaEdit);
+                $('tr[data="' + rowidEdit + '"]').find("td").eq(2).html(dateEdit);
+                $('#edit-info-button').hide();
+                $('#add-info-button').show();
+                $('#chatinput').val("");
+                $('#printchatbox').html("");
+                //modal.find('.modal-body').empty();
+                modal.find('.modal-body').html(proofEdit); }
+
+
+
+
+                //div with math wont refresh unless refresh page
+                // possibly add clear textboxes when delete
+
+
+
+
+            }); 
+
+
+
+
+        });
+
+
+    });
+
+
+
+$('#tex-stack-exchange').on('click',function(){
+
+  $('#stack-exchange-modal').modal('show');
+  $('#stack-exchange-modal-header').html("Search Tex Stack Exchange");
+    $("#stack-exchange-modal-search").on('click',function(){
+    var term = $("#stack-exchange-modal-input").val().trim();
+    var texStackExchange = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=tex.stackexchange';
+    searchStackExchange(texStackExchange);
+    $('#stack-exchange-modal').modal('hide');
+    });
+});
+
+
+$('#math-stack-exchange').on('click',function(){
+
+$('#stack-exchange-modal').modal('show');
+  $('#stack-exchange-modal-header').html("Search Math Stack Exchange");
+    $("#stack-exchange-modal-search").on('click',function(){
+    var term = $("#stack-exchange-modal-input").val().trim();
+    var mathStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=math.stackexchange';
+    searchStackExchange(mathStackExchange);
+    $('#stack-exchange-modal').modal('hide');
+    });
+});
+
+
+
+$('#math-overflow').on('click',function(){
+
+$('#stack-exchange-modal').modal('show');
+  $('#stack-exchange-modal-header').html("Search Math Overflow");
+    $("#stack-exchange-modal-search").on('click',function(){
+    var term = $("#stack-exchange-modal-input").val().trim();
+    var mathOverflow = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=mathoverflow';
+    searchStackExchange(mathOverflow);
+    $('#stack-exchange-modal').modal('hide');
+    });
+
+
+
+});
+
+$('#stack-overflow').on('click',function(){
+
+$('#stack-exchange-modal').modal('show');
+  $('#stack-exchange-modal-header').html("Search Stack Overflow");
+    $("#stack-exchange-modal-search").on('click',function(){
+    var term = $("#stack-exchange-modal-input").val().trim();
+    var stackOverflow = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=stackoverflow';
+    searchStackExchange(stackOverflow);
+    $('#stack-exchange-modal').modal('hide');
+    });
+
+
+});
+
+$('#physics-stack-exchange').on('click',function(){
+
+$('#stack-exchange-modal').modal('show');
+  $('#stack-exchange-modal-header').html("Search Physics Stack Exchange");
+    $("#stack-exchange-modal-search").on('click',function(){
+    var term = $("#stack-exchange-modal-input").val().trim();
+    var physicsStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=physics.stackexchange';
+    searchStackExchange(physicsStackExchange);
+    $('#stack-exchange-modal').modal('hide');
+    });
+
+
+
+});
+
+
+//tex is https change others if works
+
+
+
+function searchStackExchange(url){
+
+  $.ajax({url: url , method: 'GET' }).done(function(response){
+
+    var ol = $('<ul>');
+    for(var i = 0 ; i < response.items.length ; i++){
+
+    
+  //  console.log(response.items[i].title);
+   // console.log(response.items[i].link);
+    var li = $('<li>');
+    var a = $('<a>');
+    a.text(response.items[i].title);
+    a.attr('href',response.items[i].link)
+    a.attr('target','_blank');
+    li.append(a);
+    ol.append(li);
+
+  
+
+  }
+  $('#link-modal').modal('show');
+  $('#link-modal-body').html(ol);
+  
+
+});
+};
+
+
+$('#link-modal').on('hide.bs.modal', function (e) {
+  $('#link-modal').find('modal-body').html("");
+
+})
+
+
+
+
+
+
+
+
+</script>
+</body>
+
+</html>

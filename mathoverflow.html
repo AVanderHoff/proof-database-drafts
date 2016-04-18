@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+</head>
+<body>
+
+
+
+
+
+</body>
+
+<script type="text/javascript">
+	
+var term = 'feynman';
+
+
+var mathStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=math.stackexchange' ;
+
+var mathOverflow = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=mathoverflow' ;
+
+var physicsStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=physics.stackexchange' ;
+
+var stackOverflow = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=stackoverflow'
+
+var cstheoryStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=cstheory.stackexchange';
+
+var texStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=tex.stackexchange';
+
+
+
+
+$.ajax({url: texStackExchange , method: 'GET' }).done(function(response){
+
+		for(var i = 0 ; i < response.items.length ; i++){
+
+		console.log(response.items[i]);
+		//console.log(response.items[i].title);
+		//console.log(response.items[i].link);
+	
+	}
+
+
+});
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</html>
