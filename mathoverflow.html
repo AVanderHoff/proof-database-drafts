@@ -37,9 +37,9 @@ $.ajax({url: texStackExchange , method: 'GET' }).done(function(response){
 
 		for(var i = 0 ; i < response.items.length ; i++){
 
-		console.log(response.items[i]);
-		//console.log(response.items[i].title);
-		//console.log(response.items[i].link);
+		
+		console.log(response.items[i].title);
+		console.log(response.items[i].link);
 	
 	}
 

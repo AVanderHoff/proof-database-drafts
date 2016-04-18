@@ -482,6 +482,7 @@ $('#tex-stack-exchange').on('click',function(){
     var texStackExchange = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=tex.stackexchange';
     searchStackExchange(texStackExchange);
     $('#stack-exchange-modal').modal('hide');
+    
     });
 });
 
@@ -492,7 +493,7 @@ $('#stack-exchange-modal').modal('show');
   $('#stack-exchange-modal-header').html("Search Math Stack Exchange");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
-    var mathStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=math.stackexchange';
+    var mathStackExchange = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=math.stackexchange';
     searchStackExchange(mathStackExchange);
     $('#stack-exchange-modal').modal('hide');
     });
@@ -506,7 +507,7 @@ $('#stack-exchange-modal').modal('show');
   $('#stack-exchange-modal-header').html("Search Math Overflow");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
-    var mathOverflow = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=mathoverflow';
+    var mathOverflow = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=mathoverflow';
     searchStackExchange(mathOverflow);
     $('#stack-exchange-modal').modal('hide');
     });
@@ -521,7 +522,7 @@ $('#stack-exchange-modal').modal('show');
   $('#stack-exchange-modal-header').html("Search Stack Overflow");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
-    var stackOverflow = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=stackoverflow';
+    var stackOverflow = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=stackoverflow';
     searchStackExchange(stackOverflow);
     $('#stack-exchange-modal').modal('hide');
     });
@@ -535,7 +536,7 @@ $('#stack-exchange-modal').modal('show');
   $('#stack-exchange-modal-header').html("Search Physics Stack Exchange");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
-    var physicsStackExchange = 'http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=physics.stackexchange';
+    var physicsStackExchange = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=physics.stackexchange';
     searchStackExchange(physicsStackExchange);
     $('#stack-exchange-modal').modal('hide');
     });
@@ -580,7 +581,7 @@ function searchStackExchange(url){
 
 $('#link-modal').on('hide.bs.modal', function (e) {
   $('#link-modal').find('modal-body').html("");
-
+  $('#stack-exchange-modal-input').val("");
 })
 
 
