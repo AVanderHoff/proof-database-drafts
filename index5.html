@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Latex Conversion</title>
+  <title> Proof Database </title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
   <!--mathjax-->
@@ -80,8 +80,10 @@
   <div class="container">
     
     <div class="row">
+      <!-- element modals stored dynamically here-->
       <div id="modal-area"></div>
-        <div class="col-md-12"><h2>Latext Conversion</h2></div>
+        <div class="col-md-12"><h2>Proof Database</h2></div>
+        <!-- search dropdown -->
         <div class="col-md-12">  
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Search Stack Exchange
@@ -97,7 +99,7 @@
           </div>
         </div>
 
-
+      <!-- stack exchange search modal -->
       <div class="modal fade bs-example-modal-lg" id="stack-exchange-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -108,12 +110,13 @@
                   <input type="text" class="form-control" id="stack-exchange-modal-input">
                 </div>
               </form>
-              <button type="button" class="btn btn-primary" id="stack-exchange-modal-search">Submit</button>
+              <button type="button" class="btn btn-default" id="stack-exchange-modal-search">Submit</button>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- stack exchange search results modal-->
       <div class="modal fade bs-example-modal-lg" id="link-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -121,14 +124,15 @@
           </div>
         </div>
       </div>
-
+      <!-- translator -->
       <div class="col-md-6"><textarea  id="chatinput" rows="20" class="text-display" ></textarea></div>
       <div class="col-md-6"><div class="text-display" id='printchatbox'></div></div>
+      <!-- add and edit buttons-->
       <div class="col-md-12">
-        <button type="button" class="btn btn-warning unique-button" data-toggle="modal" data-target="#add-info-modal" id="add-info-button">Add Information</button>
-        <button type="button" class="btn btn-success unique-button" data-toggle="modal" data-target="#edit-info-modal" id="edit-info-button">Edit Information</button>
+        <button type="button" class="btn btn-default unique-button" data-toggle="modal" data-target="#add-info-modal" id="add-info-button">Add Information</button>
+        <button type="button" class="btn btn-default unique-button" data-toggle="modal" data-target="#edit-info-modal" id="edit-info-button">Edit Information</button>
       </div>
-      
+  <!-- modal for adding new information-->   
   <div class="col-md-12">
       <div class="modal fade" id="add-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -151,7 +155,7 @@
                   </form>
                 </div>
               <div class="modal-footer">           
-                <button type="button" class="btn btn-primary" id="submitAdd">Submit</button>
+                <button type="button" class="btn btn-default" id="submitAdd">Submit</button>
               </div>
             </div>
          </div>
@@ -162,6 +166,7 @@
     <div class="col-lg-12">
       <div class="panel panel-primary">
         <div class="panel-body">
+          <!-- table-->
           <table class="table table-hover" id="table">
             <thead>
               <tr> 
@@ -172,7 +177,7 @@
             </thead>
             <tbody ></tbody>
           </table>
-            
+     <!-- modal for editing information-->       
     <div class="modal fade" id="edit-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelEdit">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -195,7 +200,7 @@
           </div>
           </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="submitEdit">Submit</button>
+              <button type="button" class="btn btn-default" id="submitEdit">Submit</button>
             </div>
         </div>
       </div>
@@ -373,12 +378,11 @@
 
       });
 
+// tex stack exchange search
+  $('#tex-stack-exchange').on('click',function(){
 
-
-$('#tex-stack-exchange').on('click',function(){
-
-  $('#stack-exchange-modal').modal('show');
-  $('#stack-exchange-modal-header').html("Search Tex Stack Exchange");
+    $('#stack-exchange-modal').modal('show');
+    $('#stack-exchange-modal-header').html("Search Tex Stack Exchange");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
     var texStackExchange = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=tex.stackexchange';
@@ -386,114 +390,89 @@ $('#tex-stack-exchange').on('click',function(){
     $('#stack-exchange-modal').modal('hide');
     
     });
-});
+  });
 
+// math stack exchange search
+  $('#math-stack-exchange').on('click',function(){
 
-$('#math-stack-exchange').on('click',function(){
-
-$('#stack-exchange-modal').modal('show');
-  $('#stack-exchange-modal-header').html("Search Math Stack Exchange");
+    $('#stack-exchange-modal').modal('show');
+    $('#stack-exchange-modal-header').html("Search Math Stack Exchange");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
     var mathStackExchange = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=math.stackexchange';
     searchStackExchange(mathStackExchange);
     $('#stack-exchange-modal').modal('hide');
     });
-});
+  });
 
+// math overflow search
+  $('#math-overflow').on('click',function(){
 
-
-$('#math-overflow').on('click',function(){
-
-$('#stack-exchange-modal').modal('show');
-  $('#stack-exchange-modal-header').html("Search Math Overflow");
+    $('#stack-exchange-modal').modal('show');
+    $('#stack-exchange-modal-header').html("Search Math Overflow");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
     var mathOverflow = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=mathoverflow';
     searchStackExchange(mathOverflow);
     $('#stack-exchange-modal').modal('hide');
     });
+  });
 
+// stack overflow search
+  $('#stack-overflow').on('click',function(){
 
-
-});
-
-$('#stack-overflow').on('click',function(){
-
-$('#stack-exchange-modal').modal('show');
-  $('#stack-exchange-modal-header').html("Search Stack Overflow");
+    $('#stack-exchange-modal').modal('show');
+    $('#stack-exchange-modal-header').html("Search Stack Overflow");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
     var stackOverflow = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=stackoverflow';
     searchStackExchange(stackOverflow);
     $('#stack-exchange-modal').modal('hide');
     });
+  });
 
+// physics stack exchange search
+  $('#physics-stack-exchange').on('click',function(){
 
-});
-
-$('#physics-stack-exchange').on('click',function(){
-
-$('#stack-exchange-modal').modal('show');
-  $('#stack-exchange-modal-header').html("Search Physics Stack Exchange");
+    $('#stack-exchange-modal').modal('show');
+    $('#stack-exchange-modal-header').html("Search Physics Stack Exchange");
     $("#stack-exchange-modal-search").on('click',function(){
     var term = $("#stack-exchange-modal-input").val().trim();
     var physicsStackExchange = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=votes&title=' + term + '&site=physics.stackexchange';
     searchStackExchange(physicsStackExchange);
     $('#stack-exchange-modal').modal('hide');
     });
+  });
 
+  // ajax call to stack exchange api, put response onto modal
+  function searchStackExchange(url){
 
-
-});
-
-
-//tex is https change others if works
-
-
-
-function searchStackExchange(url){
-
-  $.ajax({url: url , method: 'GET' }).done(function(response){
-
-    var ol = $('<ol>');
-    for(var i = 0 ; i < response.items.length ; i++){
-
+    $.ajax({url: url , method: 'GET' }).done(function(response){
     
-  //  console.log(response.items[i].title);
-   // console.log(response.items[i].link);
-    var li = $('<li>');
-    var a = $('<a>');
-    a.text(response.items[i].title);
-    a.attr('href',response.items[i].link)
-    a.attr('target','_blank');
-    li.append(a);
-    ol.append(li);
+    var ol = $('<ol>');
+      for(var i = 0 ; i < response.items.length ; i++){
 
+        var li = $('<li>');
+        var a = $('<a>');
+        a.text(response.items[i].title);
+        a.attr('href',response.items[i].link)
+        a.attr('target','_blank');
+        li.append(a);
+        ol.append(li);
+      }
   
+    $('#link-modal').modal('show');
+    $('#link-modal-body').html(ol);
+    });
+  };
 
-  }
-  $('#link-modal').modal('show');
-  $('#link-modal-body').html(ol);
-  
-
-});
-};
-
-
-$('#link-modal').on('hide.bs.modal', function (e) {
-  $('#link-modal').find('modal-body').html("");
-  $('#stack-exchange-modal-input').val("");
-})
-
-
-
-
-
-
-
+//clears search results from modal and search parameter from input
+  $('#link-modal').on('hide.bs.modal', function (e) {
+    
+    $('#link-modal').find('modal-body').html("");
+    $('#stack-exchange-modal-input').val("");
+  });
 
 </script>
 </body>
-
 </html>
