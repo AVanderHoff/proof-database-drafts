@@ -54,7 +54,7 @@ body{background:#e9e9e9;}
 }
 #chatinput{
       height:400px;
-      color:red;
+      color: #000000;
       
 
 }
@@ -345,7 +345,7 @@ console.log(proof2);
         var div4 = $('<div class="modal-body" id"' + (now2 + 1) + '" >');
         var div5 = $('<div class="modal-footer">');
         var buttonEdit = $('<button class="edit btn btn-default" data-key="' + key + '" data-id="' + now2 + '" data-dismiss="modal" >Edit</button>');
-        var buttonDelete = $('<button class="delete" data-key="' + key + '" data-id="' + now2 + '" data-dismiss="modal">Delete</button>');
+        var buttonDelete = $('<button class="delete btn btn-default" data-key="' + key + '" data-id="' + now2 + '" data-dismiss="modal">Delete</button>');
         /*   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
            <button type="button" class="btn btn-primary">Save changes</button>
          </div> */
@@ -554,7 +554,7 @@ function searchStackExchange(url){
 
   $.ajax({url: url , method: 'GET' }).done(function(response){
 
-    var ol = $('<ul>');
+    var ol = $('<ol>');
     for(var i = 0 ; i < response.items.length ; i++){
 
     
